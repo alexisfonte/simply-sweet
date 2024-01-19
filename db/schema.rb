@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_13_194324) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_19_083223) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,22 +41,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_13_194324) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name", null: false
-    t.float "amount", null: false
+    t.string "amount", null: false
     t.string "unit", null: false
     t.integer "ordinal", null: false
     t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
-  end
-
-  create_table "recipe_tags", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_recipe_tags_on_recipe_id"
-    t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -67,12 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_13_194324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -88,8 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_13_194324) do
   add_foreign_key "favorites", "recipes"
   add_foreign_key "favorites", "users"
   add_foreign_key "ingredients", "recipes"
-  add_foreign_key "recipe_tags", "recipes"
-  add_foreign_key "recipe_tags", "tags"
   add_foreign_key "recipes", "users"
   add_foreign_key "users", "avatars"
 end

@@ -5,4 +5,5 @@ class Ingredient < ApplicationRecord
     validates :amount, presence: true
     validates :unit, presence: true
     validates :ordinal, presence: true
+
 end

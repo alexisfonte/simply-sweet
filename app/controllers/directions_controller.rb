@@ -1,2 +1,0 @@
-class DirectionsController < ApplicationController
-end
