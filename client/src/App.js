@@ -11,31 +11,16 @@ import { useAuth } from "./contexts/AuthContext";
 import Profile from "./pages/Profile";
 import EditRecipe from "./pages/EditRecipe";
 import NewRecipe from "./pages/NewRecipe";
+import { useRecipe } from "./contexts/RecipeContext";
 
 function App() {
   const { isLoggedIn } = useAuth();
-  const [userRecipes, setUserRecipes] = useState([]);
+  const { userRecipes } = useRecipe();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  function fetchAllRecipesByUser(id) {
-    fetch(`/users/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setUserRecipes(data.recipes);
-      });
-  }
-
-  function fetchFavoritedRecipesByUser(id) {
-    fetch(`/users/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setUserRecipes(data.favorited_recipes);
-      });
-  }
 
   if (!isMounted) return null;
 
@@ -66,16 +51,14 @@ function App() {
               <Route
                 path=":id"
                 element={
-                  <UserPage
-                    fetchAllRecipesByUser={fetchAllRecipesByUser}
-                    fetchFavoritedRecipesByUser={fetchFavoritedRecipesByUser}
-                  />
+                  <UserPage/>
                 }
               >
                 <Route
                   index
                   element={<RecipeContainer recipes={userRecipes} />}
                 />
+
                 <Route
                   path="favorites"
                   element={<RecipeContainer recipes={userRecipes} />}

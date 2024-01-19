@@ -1,4 +1,3 @@
-import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
 import UserCard from "../components/UserCard";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +5,7 @@ import { useState, useEffect } from "react";
 import AvatarSelector from "../components/AvatarSelector";
 
 function Profile() {
-  const { authUser, setIsLoggedIn, setAuthUser } = useAuth();
+  const { authUser, setAuthUser } = useAuth();
   const [avatars, setAvatars] = useState([]);
   const [avatarId, setAvatarId] = useState(authUser.avatar.id);
   const navigate = useNavigate();
@@ -37,23 +36,8 @@ function Profile() {
       if (res.ok) {
         res.json().then((user) => {
           setAuthUser(user);
-          navigate(`/users/me`);
+          navigate(`/users/${user.id}`);
         });
-      } else {
-        res.json().then((json) => console.log(json.errors));
-      }
-    });
-  }
-
-  function handleLogout() {
-    fetch(`/logout`, {
-      method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        setIsLoggedIn(false);
-        setAuthUser(null);
-        navigate("/");
-        navigate(0); // refresh app
       } else {
         res.json().then((json) => console.log(json.errors));
       }
@@ -66,13 +50,6 @@ function Profile() {
         <h2 className="text-4xl font-serif font-bold tracking-wide">
           Edit Profile
         </h2>
-        <button
-          className="flex items-center py-3 text-sm font-medium px-6 rounded-lg border border-transparent hover:border-black"
-          onClick={() => handleLogout()}
-        >
-          <ArrowLeftStartOnRectangleIcon className="w-5 h-5 mr-1" />
-          Log Out
-        </button>
       </div>
       <hr className="py-4" />
       <div className="bg-[#ffd8ca] px-6 pb-12 pt-6 shadow sm:rounded sm:px-12">

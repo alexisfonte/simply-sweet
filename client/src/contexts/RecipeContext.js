@@ -8,6 +8,7 @@ export function useRecipe() {
 
 export function RecipeProvider(props) {
   const [recipes, setRecipes] = useState([]);
+  const [userRecipes, setUserRecipes] = useState([]);
 
   useEffect(() => {
     fetch("/recipes").then((res) => {
@@ -23,9 +24,28 @@ export function RecipeProvider(props) {
     });
   }, []);
 
+  function fetchAllRecipesByUser(id) {
+    fetch(`/users/${id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        setUserRecipes(data.recipes);
+      });
+  }
+
+  function fetchFavoritedRecipesByUser(id) {
+    fetch(`/users/${id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        setUserRecipes(data.favorited_recipes);
+      });
+  }
+
   const value = {
     recipes,
     setRecipes,
+    fetchAllRecipesByUser,
+    fetchFavoritedRecipesByUser,
+    userRecipes
   };
 
   return (

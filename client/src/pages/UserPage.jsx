@@ -4,14 +4,21 @@ import {
   NavLink,
   Outlet,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import UserCard from "../components/UserCard";
+import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
+import { useAuth } from "../contexts/AuthContext";
+import { useRecipe } from "../contexts/RecipeContext";
 
-function UserPage({ fetchAllRecipesByUser, fetchFavoritedRecipesByUser }) {
+function UserPage() {
+  const { setAuthUser, authUser, setIsLoggedIn, isLoggedIn } = useAuth();
+  const { fetchFavoritedRecipesByUser, fetchAllRecipesByUser } = useRecipe();
   const [user, setUser] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/users/${id}`)
@@ -20,21 +27,46 @@ function UserPage({ fetchAllRecipesByUser, fetchFavoritedRecipesByUser }) {
         setUser(user);
         setIsLoaded(true);
       });
-  }, [id]);
 
-  useEffect(() => {
     const path = location.pathname.split("/");
     if (path[path.length - 1] === "favorites") {
       fetchFavoritedRecipesByUser(id);
     } else {
       fetchAllRecipesByUser(id);
     }
-  }, [location]);
+  }, [id, location]);
 
-  if (!isLoaded) return <h2>Loading...</h2>;
+  function handleLogout() {
+    fetch(`/logout`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        setIsLoggedIn(false);
+        setAuthUser(null);
+        navigate("/");
+        navigate(0); // refresh app
+      } else {
+        res.json().then((json) => console.log(json.errors));
+      }
+    });
+  }
+
+  if (!isLoaded)
+    return <h2 className="w-full text-xl font-bold text-center">Loading...</h2>;
 
   return (
     <div className="">
+      {isLoggedIn && authUser.id === parseInt(id) && (
+        <div className="w-full flex justify-end">
+          <button
+            className="flex items-center py-3 text-sm font-medium px-6 rounded-lg border border-transparent hover:border-black"
+            onClick={() => handleLogout()}
+          >
+            <ArrowLeftStartOnRectangleIcon className="w-5 h-5 mr-1" />
+            Log Out
+          </button>
+        </div>
+      )}
       <div className="flex flex-col lg:flex-row">
         <UserCard user={user} />
         <div className="mt-8 border-x border-b border-[#9cb6dd] rounded-md w-full max-w-full md:w-1/2 lg:w-2/3 flex-end">

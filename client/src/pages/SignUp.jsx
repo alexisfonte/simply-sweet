@@ -19,7 +19,7 @@ function SignUp() {
       .then((r) => r.json())
       .then((data) => {
         setAvatars(data);
-        setFormData({ ...formData, ["avatar_id"]: data[0].id });
+        setFormData((prevData) => ({ ...prevData, "avatar_id": data[0].id }));
       });
   }, []);
 
@@ -92,6 +92,7 @@ function SignUp() {
                     type="text"
                     name="username"
                     id="username"
+                    autoComplete="off"
                     required
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 p-1.5 text-[#182934] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-200 sm:text-sm sm:leading-6"
@@ -111,7 +112,7 @@ function SignUp() {
                     type="password"
                     id="password"
                     name="password"
-                    autoComplete="current-password"
+                    autoComplete="off"
                     required
                     onChange={handleChange}
                     className="block w-full rounded-md border-0 p-1.5 text-[#182934] shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-200 sm:text-sm sm:leading-6"

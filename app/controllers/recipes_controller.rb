@@ -39,7 +39,7 @@ class RecipesController < ApplicationController
     private
 
     def recipe_params
-        params.require(:recipe).permit(:title, :image_url, :is_private, :user_id, :ingredients_attributes => [:amount, :unit, :name, :ordinal], :directions_attributes => [:direction, :ordinal])
+        params.permit(:title, :image_url, :is_private, :user_id, :ingredients_attributes => [:amount, :unit, :name, :ordinal], :directions_attributes => [:direction, :ordinal])
     end
 
     def recipe_update_params
