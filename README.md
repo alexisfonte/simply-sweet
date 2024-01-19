@@ -99,8 +99,8 @@ To run this project, follow the following steps.
 
 ## Acknowledgements
 
-This project is an expanded version of my [phase 1 vanilla js project][https://github.com/alexisfonte/phase-1-project] for Flatiron School with co-contributers [Jess][https://github.com/jawndrade] and [Shadiya][https://github.com/Shadiya132].
+This project is an expanded version of my ![phase 1 vanilla js project][https://github.com/alexisfonte/phase-1-project] for Flatiron School with co-contributers ![Jess][https://github.com/jawndrade] and ![Shadiya][https://github.com/Shadiya132].
 
-Some of the styling elements for this project were inspired by the [Tastebite website template][https://fabrx.co/tastebite-food-recipes-website-template/] by [Fabrx Design][https://fabrx.co/]
+Some of the styling elements for this project were inspired by the ![Tastebite website template][https://fabrx.co/tastebite-food-recipes-website-template/] by ![Fabrx Design][https://fabrx.co/]
 
-All recipes used in the seed data were taken from [allrecipes][https://www.allrecipes.com/]. View individual author credits [here][https://github.com/alexisfonte/simply-sweet/blob/main/db/seeds.rb].
+All recipes used in the seed data were taken from ![allrecipes][https://www.allrecipes.com/]. View individual author credits ![here][https://github.com/alexisfonte/simply-sweet/blob/main/db/seeds.rb].
