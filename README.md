@@ -88,7 +88,7 @@ Users will be able to:
 | GET    | /users/:id     | user_id                                                                                                                                                          | returns a user and their recipes |
 | POST   | /users         | username, password, avatar_id                                                                                                                                    | creates a new user               |
 | PATCH  | /users/:id     | user_id, avatar_id                                                                                                                                               | updates a user's avatar          |
-| GET    | /auth          |                                                                                                                                                                  | authenticates teh current user   |
+| GET    | /auth          |                                                                                                                                                                  | authenticates the current user   |
 | POST   | /login         | username, password                                                                                                                                               | creates a user session           |
 | DELETE | /logout        |                                                                                                                                                                  | deletes a user session           |
 
