@@ -51,15 +51,19 @@ Users will be able to:
 
 #### Browse/Search Recipes & Recipe Page
 
-![]()
+![](/images/BrowseSearch.gif)
 
-#### Create/Edit/Delete Recipes
+#### Create/Edit Recipes
 
-![]()
+![](/images/CreateAndEditRecipe.gif)
+
+#### Private/Delete Recipes
+
+![](/images/PrivateAndDeleteRecipe.gif)
 
 #### User Page & Edit Profile
 
-![]()
+![](/images/EditProfile.gif)
 
 #### Favorite/Unfavorite Recipes
 
